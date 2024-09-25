@@ -6,15 +6,18 @@ import { useState, useEffect } from "react";
 export const Home = () => {
   const { products, categories } = useProducts();
   const [categorizedProducts, setCategorizedProducts] = useState([]);
-  const [priceFilteredProducts, setPriceFilteredProducts] = useState([
-    ...categorizedProducts,
-  ]);
+  const [priceFilteredProducts, setPriceFilteredProducts] = useState([]);
   useEffect(() => {
     if (products?.length > 0) {
-      setCategorizedProducts([...products]);
-      setPriceFilteredProducts([...categorizedProducts]);
+      setPriceFilteredProducts([...products]); // Initially show all products
     }
   }, [products]);
+
+  // Update price filtered products whenever categorized products change
+  useEffect(() => {
+    setPriceFilteredProducts([...categorizedProducts]);
+  }, [categorizedProducts]);
+
   const handleCategoryClick = (name) => {
     let categoryProducts = products.filter(
       (product) => product.category.name.toLowerCase() === name.toLowerCase()
@@ -87,7 +90,10 @@ export const Home = () => {
                   <input type="radio" name="price" value="all" defaultChecked />
                   <p>All</p>
                 </div>
-                <button type="submit" className="cursor-pointer bg-red-400 rounded-s-full rounded-e-full px-2">
+                <button
+                  type="submit"
+                  className="cursor-pointer bg-red-400 rounded-s-full rounded-e-full px-2"
+                >
                   Apply
                 </button>
               </div>
