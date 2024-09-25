@@ -22,7 +22,7 @@ export const ProductsCard = ({ product }) => {
         <div className="card-title">{product.title}</div>
         <div className="card-description">
           <p className="card-des">{product.description.substring(0, 30)}</p>
-          <p className="card-price">Rs. {product.price}</p>
+          <p className="card-price">$ {product.price}</p>
         </div>
         <div className="cta-btn">
           <button
