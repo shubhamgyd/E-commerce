@@ -1,7 +1,7 @@
 import { Navbar } from "../components/Navbar";
 import { ProductsCard } from "../components/ProductsCard";
 import { useProducts } from "../context/productContext";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { findCategorizedProducts } from "../utils/findCategorizedProducts";
 import { findPriceCategorizedProducts } from "../utils/findPriceCategorizedProducts";
 
