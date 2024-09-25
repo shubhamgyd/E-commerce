@@ -20,7 +20,6 @@ export const Home = () => {
       (product) => product.category.name.toLowerCase() === name.toLowerCase()
     );
     setCategorizedProducts(categoryProducts);
-    setPriceFilteredProducts([...categorizedProducts]);
   };
 
   // const handleSubmit = (e) => {
