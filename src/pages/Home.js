@@ -2,50 +2,28 @@ import { Navbar } from "../components/Navbar";
 import { ProductsCard } from "../components/ProductsCard";
 import { useProducts } from "../context/productContext";
 import { useState, useEffect } from "react";
+import { findCategorizedProducts } from "../utils/findCategorizedProducts";
+import { findPriceCategorizedProducts } from "../utils/findPriceCategorizedProducts";
 
 export const Home = () => {
   const { products, categories } = useProducts();
-  const [categorizedProducts, setCategorizedProducts] = useState([]);
-  const [priceFilteredProducts, setPriceFilteredProducts] = useState([]);
-  useEffect(() => {
-    if (products?.length > 0) {
-      setPriceFilteredProducts([...products]); // Initially show all products
-    }
-  }, [products]);
+  const [ selectedCategory, setSelectedCategory ] = useState("All");
+  const [priceCategory, setPriceCategory] = useState("All")
 
-  // Update price filtered products whenever categorized products change
-  useEffect(() => {
-    setPriceFilteredProducts([...categorizedProducts]);
-  }, [categorizedProducts]);
-
-  const handleCategoryClick = (name) => {
-    let categoryProducts = products.filter(
-      (product) => product.category.name.toLowerCase() === name.toLowerCase()
-    );
-    setCategorizedProducts(categoryProducts);
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   console.log(e)
-  // }
+  let categorizedProducts = findCategorizedProducts(products, selectedCategory);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Get the value of the selected radio button
     const formData = new FormData(e.target);
     const selectedPrice = formData.get("price");
-    console.log("Selected Price: ", selectedPrice);
-
-    // You can now filter products based on the selected price
-    if (selectedPrice !== "all") {
-      const filteredProducts = categorizedProducts?.filter(
-        (product) => product.price <= Number(selectedPrice)
-      );
-      setPriceFilteredProducts(filteredProducts);
-    } else {
-      setPriceFilteredProducts([...categorizedProducts]);
-    }
+    setPriceCategory(selectedPrice);
   };
+
+  let priceCategorizedProducts = findPriceCategorizedProducts(categorizedProducts, priceCategory)
 
   return (
     <>
@@ -101,8 +79,8 @@ export const Home = () => {
           </div>
         </div>
         <div className="flex flex-wrap gap-8 justify-center absolute left-1/4">
-          {priceFilteredProducts?.length > 0 &&
-            priceFilteredProducts.map((product) => (
+          {priceCategorizedProducts?.length > 0 &&
+            priceCategorizedProducts.map((product) => (
               <ProductsCard product={product} />
             ))}
         </div>

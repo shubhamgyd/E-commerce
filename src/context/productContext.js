@@ -12,6 +12,7 @@ const ProductProvider = ({ children }) => {
       const product = await getAllProducts("/products");
       let categories = await getAllProducts("/categories")
       categories = categories?.splice(0, 6)
+      categories = [...categories, {name: "all", id: 'a1'}]
       setProducts(product);
       setCategories(categories);
     })();
