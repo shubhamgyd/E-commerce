@@ -1,18 +1,20 @@
+import { handleCartButtonClick } from "../utils/handleCartButtonClick";
+import { useWishlist } from "../context/wishlistContext";
+import { findProductInCart } from "../utils/findProductInCart";
 import { useCart } from "../context/cartContext";
 import { useNavigate } from "react-router-dom";
-import { findProductInCart } from "../utils/findProductInCart";
-import { useWishlist } from "../context/wishlistContext";
-import { findProductInWishlist } from "../utils/findProductInWishlist";
-import { handleCartButtonClick } from "../utils/handleCartButtonClick";
-import { handleAddWishlist } from "../utils/handleAddWishlist";
-export const ProductsCard = ({ product }) => {
-  const { dispatchProducts, cart } = useCart();
-  const { dispatchWishlistProducts, wishlist } = useWishlist();
+export const WishlistProductCard = ({ product }) => {
   const navigate = useNavigate();
-
+  const {dispatchWishlistProducts} = useWishlist();
+  const {cart, dispatchProducts} = useCart();
   const isProductInCart = findProductInCart(cart, product.id);
-  const isProductInWishlist = findProductInWishlist(wishlist, product.id);
 
+  const handleRemoveWishlist = (id) => {
+    dispatchWishlistProducts({
+      type: "REMOVE_FROM_WISHLIST",
+      payload: {id}
+    })
+  }
   return (
     <div className="card card-vertical d-flex direction-column relative shadow">
       <div className="card-image-container">
@@ -46,14 +48,10 @@ export const ProductsCard = ({ product }) => {
             )}
           </button>
           <button
-            onClick={() => handleAddWishlist(product, dispatchWishlistProducts, navigate, wishlist)}
+            onClick={() => handleRemoveWishlist(product.id)}
             className=" button btn-primary btn-icon cart-btn d-flex align-center justify-center gap cursor btn-margin"
           >
-            {isProductInWishlist ? (
-              <div>Move To Wishlist</div>
-            ) : (
-              <div>Add To Wishlist</div>
-            )}
+            Remove From Wishlist
           </button>
         </div>
       </div>

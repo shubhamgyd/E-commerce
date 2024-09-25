@@ -5,11 +5,15 @@ const productContext = createContext();
 
 const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     (async () => {
       const product = await getAllProducts("/products");
+      let categories = await getAllProducts("/categories")
+      categories = categories?.splice(0, 6)
       setProducts(product);
+      setCategories(categories);
     })();
   }, []);
 
@@ -17,6 +21,7 @@ const ProductProvider = ({ children }) => {
     <productContext.Provider
       value={{
         products,
+        categories
       }}
     >
       {children}

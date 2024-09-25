@@ -1,4 +1,4 @@
-export const ProductReducer = (state, { type, payload }) => {
+export const cartReducer = (state, { type, payload }) => {
   switch (type) {
     case "CART":
       return {

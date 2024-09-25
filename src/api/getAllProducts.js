@@ -1,7 +1,7 @@
 import axios from "axios";
 const BaseURL = "https://api.escuelajs.co/api/v1";
-export const getAllProducts = async () => {
-  let url = `${BaseURL}/products`;
+export const getAllProducts = async (params) => {
+  let url = BaseURL + params;
   try {
     const { data } = await axios.get(url);
     console.log(data);

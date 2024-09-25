@@ -3,7 +3,7 @@ import {
   useContext,
   useReducer,
 } from "react";
-import { ProductReducer } from "../reducer/ProductReducer";
+import { cartReducer } from "../reducer/cartReducer";
 
 const cartContext = createContext();
 
@@ -12,7 +12,7 @@ const CartProvider = ({ children }) => {
   const initialState = {
     cart: [],
   };
-  const [{ cart }, dispatchProducts] = useReducer(ProductReducer, initialState);
+  const [{ cart }, dispatchProducts] = useReducer(cartReducer, initialState);
 
   return (
     <cartContext.Provider

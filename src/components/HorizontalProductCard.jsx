@@ -1,6 +1,14 @@
 import { useCart } from "../context/cartContext";
+import { useWishlist } from "../context/wishlistContext";
+import { useNavigate } from "react-router-dom";
+import { handleAddWishlist } from "../utils/handleAddWishlist";
+import { findProductInWishlist } from "../utils/findProductInWishlist";
 export const HorizontalProductCard = ({ product }) => {
   const { dispatchProducts } = useCart();
+  const {dispatchWishlistProducts, wishlist} = useWishlist();
+  const navigate = useNavigate();
+
+  const isProductInWishlist = findProductInWishlist(wishlist, product.id)
 
   const handleRemoveClick = (id) => {
     dispatchProducts({
@@ -37,9 +45,16 @@ export const HorizontalProductCard = ({ product }) => {
             </button>
           </div>
           <div class="cta-btn">
-            <button class="button hori-btn btn-outline-primary btn-icon d-flex align-center justify-center gap cursor btn-margin">
-              Move to Favorite
-            </button>
+          <button
+            onClick={() => handleAddWishlist(product, dispatchWishlistProducts, navigate, wishlist)}
+            className=" button btn-primary btn-icon cart-btn d-flex align-center justify-center gap cursor btn-margin"
+          >
+            {isProductInWishlist ? (
+              <div>Move To Wishlist</div>
+            ) : (
+              <div>Add To Wishlist</div>
+            )}
+          </button>
           </div>
         </div>
       </div>
