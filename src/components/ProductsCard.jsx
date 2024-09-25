@@ -1,20 +1,34 @@
-export const ProductsCard = ({product}) => {
+import { useCart } from "../context/cartContext";
+// import { useNavigate } from "react-router-dom";
+export const ProductsCard = ({ product }) => {
+  const { dispatchProducts, cart } = useCart();
+
+  const handleCartButtonClick = (product) => {
+    dispatchProducts({
+      type: "CART",
+      payload: {product},
+    });
+  };
+
   return (
-    <div class="card card-vertical d-flex direction-column relative shadow">
-      <div class="card-image-container">
-        <img class="card-image" src={product.images[0]}alt="shoes" />
+    <div className="card card-vertical d-flex direction-column relative shadow">
+      <div className="card-image-container">
+        <img className="card-image" src={product.images[0]} alt="shoes" />
       </div>
-      <div class="card-details">
-        <div class="card-title">{product.title}</div>
-        <div class="card-description">
-          <p class="card-des">{product.description.substring(0, 30)}</p>
-          <p class="card-price">
-            Rs. {product.price}
-          </p>
+      <div className="card-details">
+        <div className="card-title">{product.title}</div>
+        <div className="card-description">
+          <p className="card-des">{product.description.substring(0, 30)}</p>
+          <p className="card-price">Rs. {product.price}</p>
         </div>
-        <div class="cta-btn">
-          <button class="button btn-primary btn-icon cart-btn d-flex align-center justify-center gap cursor btn-margin">
-          <span className="material-icons-outlined hover:cursor">shopping_cart</span>
+        <div className="cta-btn">
+          <button
+            onClick={() => handleCartButtonClick(product)}
+            className=" button btn-primary btn-icon cart-btn d-flex align-center justify-center gap cursor btn-margin"
+          >
+            <span className="material-icons-outlined hover:cursor">
+              shopping_cart
+            </span>
             Add To Cart
           </button>
         </div>
