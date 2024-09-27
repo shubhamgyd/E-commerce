@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ProductProvider } from "./context/productContext";
 import { CartProvider } from "./context/cartContext";
 import { WishlistProvider } from "./context/wishlistContext";
+import { LoginProvider } from "./context/loginContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,7 +16,9 @@ root.render(
       <ProductProvider>
         <CartProvider>
           <WishlistProvider>
+            <LoginProvider>
             <App />
+            </LoginProvider>
           </WishlistProvider>
         </CartProvider>
       </ProductProvider>
