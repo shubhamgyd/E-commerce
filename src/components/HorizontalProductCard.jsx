@@ -47,7 +47,7 @@ export const HorizontalProductCard = ({ product }) => {
           <div class="cta-btn">
           <button
             onClick={() => handleAddWishlist(product, dispatchWishlistProducts, navigate, wishlist)}
-            className=" button btn-primary btn-icon cart-btn d-flex align-center justify-center gap cursor btn-margin"
+            className="button hori-btn btn-primary btn-icon cart-btn d-flex align-center justify-center gap cursor btn-margin" 
           >
             {isProductInWishlist ? (
               <div>Move To Wishlist</div>

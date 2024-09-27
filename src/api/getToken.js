@@ -1,5 +1,4 @@
 import axios from "axios"
-import { useLogin } from "../context/loginContext";
 const BaseURL = "https://api.escuelajs.co/api/v1";
 export const getToken = async (params, email, password) => {
   let url = BaseURL + params
