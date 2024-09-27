@@ -8,7 +8,7 @@ const LoginProvider = ({children}) => {
   const initialState = {
     email: "",
     password: "",
-    isLoggedIn: false
+    isLoggedIn: (JSON.parse(localStorage.getItem('accessToken'))?.access_token) ? true : false
   };
   const [{ email, password, isLoggedIn }, dispatchLogin] = useReducer(
     loginReducer,

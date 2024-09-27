@@ -8,7 +8,6 @@ export const getToken = async (params, email, password) => {
     email,
     password,
   })
-  console.log(data)
   return data;
 }
   catch (error) {

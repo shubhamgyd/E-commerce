@@ -1,8 +1,10 @@
 import { useLogin } from "../context/loginContext";
 import { getToken } from "../api/getToken";
+import { useNavigate } from "react-router-dom";
 export const Login = () => {
   
   const {email, password, dispatchLogin} = useLogin();
+  const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -11,7 +13,10 @@ export const Login = () => {
     dispatchLogin({
       type: "TOKEN",
       payload: {value: true}
-    })}
+    });
+    localStorage.setItem('accessToken', JSON.stringify(token));
+    navigate("/");
+  }
   };
 
   const handleEmail = (e) => {

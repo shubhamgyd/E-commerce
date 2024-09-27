@@ -8,8 +8,8 @@ export const Cart = () => {
     <>
       <Navbar />
       {cart?.length > 0 ? (
-        <div className="flex gap-8 justify-center pt-20">
-          <div className="flex flex-col">
+        <div className="w-full flex gap-8 justify-center pt-20">
+          <div className="flex flex-col w-1/2">
             {cart?.length > 0 &&
               cart.map((product) => (
                 <HorizontalProductCard key={product.id} product={product} />

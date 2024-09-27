@@ -13,6 +13,7 @@ export const loginReducer = (state, {type, payload}) => {
         ...state, isLoggedIn: payload.value
       }
     case "LOGOUT":
+      localStorage.setItem("accessToken", JSON.stringify(""));
       return {
         ...state, isLoggedIn: payload.value
       }

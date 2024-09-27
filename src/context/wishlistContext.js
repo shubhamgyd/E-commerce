@@ -5,7 +5,7 @@ const wishlistContext = createContext();
 
 const WishlistProvider = ({ children }) => {
   const initialState = {
-    wishlist: [],
+    wishlist: JSON.parse(localStorage.getItem("Wishlist")) || [],
   };
   const [{ wishlist }, dispatchWishlistProducts] = useReducer( 
     wishlistReducer,

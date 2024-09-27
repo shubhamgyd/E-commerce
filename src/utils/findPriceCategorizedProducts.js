@@ -1,5 +1,4 @@
 export const findPriceCategorizedProducts = (categorizedProducts, priceCategory) => {
-  console.log(priceCategory);
   if (priceCategory.toLowerCase() === "all") {
     return categorizedProducts;
   } else{

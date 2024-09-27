@@ -81,7 +81,7 @@ export const Home = () => {
         <div className="flex flex-wrap gap-8 justify-center absolute left-1/4">
           {priceCategorizedProducts?.length > 0 &&
             priceCategorizedProducts.map((product) => (
-              <ProductsCard product={product} />
+              <ProductsCard key={product.id} product={product} />
             ))}
         </div>
       </div>
