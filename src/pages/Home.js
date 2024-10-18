@@ -4,17 +4,30 @@ import { useProducts } from "../context/productContext";
 import { useState} from "react";
 import { findCategorizedProducts } from "../utils/findCategorizedProducts";
 import { findPriceCategorizedProducts } from "../utils/findPriceCategorizedProducts";
+import { useEffect } from "react";
 
 export const Home = () => {
   const { products, categories } = useProducts();
+  const [product, setProduct] = useState([]);
   const [ selectedCategory, setSelectedCategory ] = useState("All");
   const [priceCategory, setPriceCategory] = useState("All")
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const allProducts = await products;
+        setProduct(allProducts)
+      } catch (e) {
+        console.log(e);
+      }
+    })()
+  })
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
 
-  let categorizedProducts = findCategorizedProducts(products, selectedCategory);
+  let categorizedProducts = findCategorizedProducts(product, selectedCategory);
 
   const handleSubmit = (e) => {
     e.preventDefault();
